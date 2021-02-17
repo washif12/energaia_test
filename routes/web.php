@@ -21,13 +21,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/user', function () {
-    return view('home');
-})->middleware('user');
-Route::get('/supplier', function () {
-    return view('supplierHome');
-})->middleware('supplier');
+Route::get('/user',[App\Http\Controllers\HomeController::class, 'indexUser'])->middleware('user');
+Route::get('/supplier', [App\Http\Controllers\HomeController::class, 'indexSupplier'])->name('supplierPage')->middleware('supplier');
 
-Auth::routes();
+Route::post('/order',[App\Http\Controllers\HomeController::class, 'orderProduct'])->name('order');
+Route::post('/deliver',[App\Http\Controllers\HomeController::class, 'deliverProduct'])->name('deliver');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');*/
